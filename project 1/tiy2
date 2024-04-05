@@ -1,0 +1,62 @@
+#TIY 12-2
+import pygame
+import sys
+
+class Character:
+    def __init__(self, image_path):
+        # Load character image
+        self.image = pygame.image.load(image_path)
+        self.rect = self.image.get_rect()
+
+    def draw(self, screen):
+        # Draw character at the center of the screen
+        screen_rect = screen.get_rect()
+        self.rect.center = screen_rect.center
+        screen.blit(self.image, self.rect)
+
+def main():
+    # Initialize Pygame
+    pygame.init()
+
+    # Set the dimensions of the window
+    window_width = 800
+    window_height = 600
+    window_size = (window_width, window_height)
+
+    # Create the Pygame window
+    screen = pygame.display.set_mode(window_size)
+
+    # Set the title of the window
+    pygame.display.set_caption("Character Drawing")
+
+    # Set the background color (RGB values)
+    background_color = (255, 255, 255)  # White color
+
+    # Load character image and create character object
+    character = Character("images/buddy.bmp")  # Replace "character_image.bmp" with your image path
+
+    # Main loop
+    running = True
+    while running:
+        # Event handling
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        # Fill the screen with the background color
+        screen.fill(background_color)
+        
+        # Draw the character
+        character.draw(screen)
+        
+        # Update the display
+        pygame.display.flip()
+
+    # Quit Pygame
+    pygame.quit()
+
+    # Quit Python
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
